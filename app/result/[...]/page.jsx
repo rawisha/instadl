@@ -47,7 +47,7 @@ function ResultPage() {
             Preview your Instagram content 🚀
           </h2>
           {(userData?.display_url || userData.video_url) && (
-            <h2 className='text-2xl sm:text-3xl md:text-3xl text-center shadow-2xl rounded-br-full drop-shadow-2xl mb-5 bg-white border p-5 '><span className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent'>Your Content is ready to be downloaded </span>🚀✅</h2>
+            <h2 className='text-2xl sm:text-3xl md:text-3xl text-center shadow-2xl rounded-br-full drop-shadow-2xl mb-5 bg-white border p-5 '><span className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent'>Your Content is ready to be downloaded </span>🚀✅⏬</h2>
           )}
           
           <p className="text-center text-white mb-8">
@@ -60,7 +60,7 @@ function ResultPage() {
 
       {(userData?.display_url || userData.video_url) && (
         <div className='flex items-center justify-center mt-10'>
-        <h2 className='text-2xl sm:text-3xl md:text-4xl text-center '><span className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent'>Your Content is ready to be downloaded, Scroll Down !! </span>🚀✅</h2>
+        <h2 className='text-2xl sm:text-3xl md:text-4xl text-center '><span className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent'>Your Content is ready to be downloaded, Scroll Down !! </span>🚀✅⏬</h2>
       </div>
       )}
 

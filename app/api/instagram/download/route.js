@@ -88,17 +88,31 @@ export async function POST(request) {
         const response = await axios.post(url, payload, { headers });
         const data = response.data;
 
-        const xdt_shortcode_media = data.data.xdt_shortcode_media; 
+        const xdt_shortcode_media = data.data.xdt_shortcode_media;
+        
+        // Check for carousel (multiple images)
+        const isCarousel = xdt_shortcode_media.edge_sidecar_to_children ? true : false;
+        const carouselCount = isCarousel ? xdt_shortcode_media.edge_sidecar_to_children.edges.length : 0;
+
+        // Get details for video or image
         const video_url = xdt_shortcode_media.video_url || null;
-        const username = xdt_shortcode_media.owner["username"] || null;
-        const profile_picture = xdt_shortcode_media.owner["profile_pic_url"] || null;
+        const username = xdt_shortcode_media.owner?.username || null;
+        const profile_picture = xdt_shortcode_media.owner?.profile_pic_url || null;
         const display_url = xdt_shortcode_media.display_url || null;
         const video_count = xdt_shortcode_media.video_view_count || 0;
         const isVideo = xdt_shortcode_media.is_video;
 
-        return NextResponse.json({ video_url, username, profile_picture, display_url, video_count, isVideo }, { status: 200 });
+        if (isCarousel) {
+            // Fetch carousel images if available
+            const carouselUrls = xdt_shortcode_media.edge_sidecar_to_children.edges.map(item => item.node.display_url);
+            return NextResponse.json({ video_url, username, profile_picture, display_url, video_count, isVideo, isCarousel, carouselUrls, carouselCount }, { status: 200 });
+        }
+
+        // Return response for single image or video
+        return NextResponse.json({ video_url, username, profile_picture, display_url, video_count, isVideo, isCarousel, carouselCount }, { status: 200 });
+
     } catch (error) {
         console.error("Error:", error);
-        return NextResponse.json({ error: 'Failed to fetch video data' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to fetch media details' }, { status: 500 });
     }
 }

@@ -11,5 +11,6 @@ A Small project to download instagram content using Nextjs 15
 TODO: 
 - Support for Story
 - Support for IGTV
+- Support for Carousel *Done*
 - Fix small design
 - Fill out ads spaces.
